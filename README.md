@@ -1,4 +1,4 @@
-# Brain MRI Modality Translation (T1n → T2w) with pix2pix GAN
+# Brain MRI Modality Translation with pix2pix GAN
 
 This project trains a pix2pix GAN (U-Net generator + PatchGAN discriminator)
 to synthesize T2-weighted (T2w) 2D brain MRI images from T1-normalized (T1n) images using
