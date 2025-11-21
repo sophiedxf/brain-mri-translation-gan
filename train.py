@@ -4,8 +4,8 @@ import torch.nn as nn
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 
-from dataset_brats import get_loaders
-from model_brats import UNetGenerator, PatchDiscriminator
+from dataset import get_loaders
+from models import UNetGenerator, PatchDiscriminator
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("Using device:", device)
@@ -22,8 +22,8 @@ criterion_gan = nn.BCEWithLogitsLoss()
 criterion_l1 = nn.L1Loss()
 lambda_l1 = 100.0
 
-os.makedirs("checkpoints_brats", exist_ok=True)
-os.makedirs("samples_brats", exist_ok=True)
+os.makedirs("checkpoints", exist_ok=True)
+os.makedirs("samples", exist_ok=True)
 
 def train_one_epoch(epoch):
     G.train()
@@ -84,7 +84,7 @@ def save_samples(epoch):
             for ax in axes:
                 ax.axis("off")
             plt.tight_layout()
-            plt.savefig(f"samples_brats/epoch{epoch}_example{i}.png")
+            plt.savefig(f"samples/epoch{epoch}_example{i}.png")
             plt.close()
             break  # just one batch
 
@@ -93,8 +93,8 @@ def main():
     for epoch in range(1, num_epochs + 1):
         train_one_epoch(epoch)
         save_samples(epoch)
-        torch.save(G.state_dict(), f"checkpoints_brats/G_epoch{epoch}.pth")
-        torch.save(D.state_dict(), f"checkpoints_brats/D_epoch{epoch}.pth")
+        torch.save(G.state_dict(), f"checkpoints/G_epoch{epoch}.pth")
+        torch.save(D.state_dict(), f"checkpoints/D_epoch{epoch}.pth")
 
 if __name__ == "__main__":
     main()

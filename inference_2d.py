@@ -4,7 +4,7 @@ import torch
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-from model_brats import UNetGenerator
+from models import UNetGenerator
 
 # ---------------------------------------------------
 # Load trained generator
@@ -13,7 +13,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("Using device:", device)
 
 G = UNetGenerator().to(device)
-G.load_state_dict(torch.load("checkpoints_brats/G_epoch50.pth", map_location=device))
+G.load_state_dict(torch.load("checkpoints/G_epoch50.pth", map_location=device))
 G.eval()
 
 
@@ -25,11 +25,11 @@ def infer_triplet(npz_path, out_png_path=None):
     """
     Load .npz (t1n, t2w), generate fake T2,
     and save a PNG with T1 | Real T2 | Generated T2
-    using EXACTLY the same plotting code as in train_brats.py.
+    using EXACTLY the same plotting code as in train.py.
     """
     data = np.load(npz_path)
 
-    # These should match what dataset_brats returns: t1n / t2w or t1 / t2
+    # These should match what dataset returns: t1n / t2w or t1 / t2
     # Adjust keys if needed.
     real_t1 = data["t1n"].astype(np.float32)
     real_t2 = data["t2w"].astype(np.float32)
@@ -40,9 +40,9 @@ def infer_triplet(npz_path, out_png_path=None):
     with torch.no_grad():
         fake_t2 = G(t1_t)
 
-    gen_t2 = fake_t2[0, 0].cpu().numpy()  # same style as train_brats
+    gen_t2 = fake_t2[0, 0].cpu().numpy()  # same style as train
 
-    # --------- PLOTTING: COPY-PASTE FROM train_brats.py ----------
+    # --------- PLOTTING: COPY-PASTE FROM train.py ----------
     if out_png_path is not None:
         fig, axes = plt.subplots(1, 3, figsize=(9, 3))
         axes[0].imshow(real_t1, cmap="gray"); axes[0].set_title("T1")
@@ -51,7 +51,7 @@ def infer_triplet(npz_path, out_png_path=None):
         for ax in axes:
             ax.axis("off")
         plt.tight_layout()
-        # NOTE: no bbox_inches / pad_inches here, to match train_brats.py
+        # NOTE: no bbox_inches / pad_inches here, to match train.py
         plt.savefig(out_png_path)
         plt.close()
     # -------------------------------------------------------------

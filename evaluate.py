@@ -3,8 +3,8 @@ import torch
 from torch.utils.data import DataLoader
 from skimage.metrics import peak_signal_noise_ratio, structural_similarity
 
-from dataset_brats import BraTSMRIDataset
-from model_brats import UNetGenerator
+from dataset import BraTSMRIDataset
+from models import UNetGenerator
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -12,7 +12,7 @@ test_ds = BraTSMRIDataset(r"data\BraTS2023_slices\test")
 test_loader = DataLoader(test_ds, batch_size=4, shuffle=False, num_workers=0)
 
 G = UNetGenerator().to(device)
-G.load_state_dict(torch.load(r"checkpoints_brats\G_epoch50.pth", map_location=device))
+G.load_state_dict(torch.load(r"checkpoints\G_epoch50.pth", map_location=device))
 G.eval()
 
 psnrs, ssim_vals = [], []

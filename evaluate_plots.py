@@ -6,8 +6,8 @@ import torch
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 
-from dataset_brats import BraTSMRIDataset
-from model_brats import UNetGenerator
+from dataset import BraTSMRIDataset
+from models import UNetGenerator
 
 # -----------------------------
 # 1. Setup: device, paths, dirs
@@ -21,7 +21,7 @@ test_ds = BraTSMRIDataset(r"data\BraTS2023_slices\test")
 test_loader = DataLoader(test_ds, batch_size=4, shuffle=False, num_workers=0)
 
 # Load trained generator
-checkpoint_path = r"checkpoints_brats\G_epoch50.pth"  # adjust if needed
+checkpoint_path = r"checkpoints\G_epoch50.pth"  # adjust if needed
 print("Loading generator from:", checkpoint_path)
 
 G = UNetGenerator().to(device)
