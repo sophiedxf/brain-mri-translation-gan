@@ -1,0 +1,26 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Conda / virtual envs (if any)
+.env/
+.venv/
+venv/
+
+# Data
+data/BraTS2023/
+data/BraTS2023_slices/
+
+# Outputs, logs, plots
+checkpoints_brats/
+samples_brats/
+eval_plots/
+generated_slices/
+generated_triplets/
+generated_T2/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VSCode settings
+.vscode/
