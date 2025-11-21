@@ -1,7 +1,7 @@
-# Brain MRI GAN (T1n → T2w) on BraTS 2023
+# Brain MRI Modality Translation (T1n → T2w) with pix2pix GAN
 
 This project trains a pix2pix GAN (U-Net generator + PatchGAN discriminator)
-to synthesize T2-weighted (T2w) 2D brain MRI slices from T1-normalized (T1n) slices using
+to synthesize T2-weighted (T2w) 2D brain MRI images from T1-normalized (T1n) images using
 the BraTS 2023 dataset.
 
 ## Example Output
@@ -12,7 +12,7 @@ Below is an example showing the model’s inference output (T1 → Real T2 → G
 
 ## Project structure
 
-- `preprocess_brats.py` — converts BraTS 2023 volumes into 2D paired slices (.npz)
+- `preprocess_brats.py` — converts BraTS 2023 3D brain MRI volumes into 2D paired slices (.npz)
 - `split_brats_slices.py` — splits slices into train/val/test sets
 - `dataset_brats.py` — PyTorch Dataset/DataLoader for BraTS slices
 - `model_brats.py` — U-Net generator and PatchGAN discriminator
