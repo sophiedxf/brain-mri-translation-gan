@@ -4,6 +4,12 @@ This project trains a pix2pix GAN (U-Net generator + PatchGAN discriminator)
 to synthesize T2-weighted (T2w) 2D brain MRI slices from T1-normalized (T1n) slices using
 the BraTS 2023 dataset.
 
+## Example Output
+
+Below is an example showing the model’s inference output (T1 → Real T2 → Generated T2):
+
+<p align="center"> <img src="images/example.png" width="800"> </p>
+
 ## Project structure
 
 - `preprocess_brats.py` — converts BraTS 2023 volumes into 2D paired slices (.npz)
