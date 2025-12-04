@@ -12,14 +12,14 @@ Below is an example showing the model’s inference output (T1 → Real T2 → G
 
 ## Project structure
 
-- `preprocess_brats.py` — converts BraTS 2023 3D brain MRI volumes into 2D paired slices (.npz)
-- `split_brats_slices.py` — splits slices into train/val/test sets
-- `dataset_brats.py` — PyTorch Dataset/DataLoader for BraTS slices
-- `model_brats.py` — U-Net generator and PatchGAN discriminator
-- `train_brats.py` — training loop (GAN + L1 loss)
-- `evaluate_brats.py` — PSNR/SSIM evaluation
-- `evaluate_plots_brats.py` — histogram + Bland–Altman plots
-- `inference_2d_brats.py` — inference, saves T1 / Real T2 / Generated T2 images in .png format
+- `preprocess.py` — converts BraTS 2023 3D brain MRI volumes into 2D paired slices (.npz)
+- `split_slices.py` — splits slices into train/val/test sets
+- `dataset.py` — PyTorch Dataset/DataLoader for BraTS slices
+- `model.py` — U-Net generator and PatchGAN discriminator
+- `train.py` — training loop (GAN + L1 loss)
+- `evaluate.py` — PSNR/SSIM evaluation
+- `evaluate_plots.py` — histogram + Bland–Altman plots
+- `inference_2d.py` — inference, saves T1 / Real T2 / Generated T2 images in .png format
 
 ## Environment
 
